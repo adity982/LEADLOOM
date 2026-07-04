@@ -73,11 +73,3 @@ To get the **before/after pair**, run a baseline first: set `DRAFT_SYSTEM`'s fac
 
 **Google Sheets (optional):** `pip install gspread`, create a service account, set `GOOGLE_SERVICE_ACCOUNT_JSON` to the key file path, share the sheet with the service-account email, then `POST /api/runs/{id}/export/sheets`.
 
-## Reading order (so you own this in an interview)
-
-1. `app/pipeline/graph.py` — the whole agent is here; every node is ~30 lines.
-2. `app/research.py` — the grounding rule: where facts get their `source_url`, and why the draft never sees raw web text.
-3. `app/llm.py` + `app/ratelimit.py` — cost accounting and the token-bucket/backoff pair; be ready to explain why a semaphore alone isn't enough (it caps parallelism, not rate).
-4. `scripts/eval_harness.py` — how the headline metric is computed and how verifier precision/recall against your labels is what makes the auto number trustworthy.
-
-Guardrails baked in: no LinkedIn scraping (public sites + search API only), and a human stays in the send loop — the tool drafts, a person approves and sends.
