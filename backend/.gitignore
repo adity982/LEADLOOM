@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.db
+.env
+output.csv
+eval_set*.csv
